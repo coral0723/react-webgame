@@ -1,0 +1,34 @@
+<html>
+<head>
+</head>
+<body>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<!--<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>-->
+<!--<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>-->
+<script>
+  'use strict';
+
+  const e = React.createElement;
+
+  class LikeButton extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {liked: false};
+    }
+
+    render() { //render의 return 부분이 화면을 그리는 부분
+      if (this.state.liked) {
+        return 'You liked this.';
+      }
+
+      return e('button', {onClick: () => this.setState({liked: true})}, 'Like'); //리액트에선 객체를 함부로 바꾸지말고 복사해라.
+    }
+  }
+</script>
+<script>
+  ReactDOM.render(e(LikeButton), document.querySelector('#root'));
+</script>
+</body>
+</html>
