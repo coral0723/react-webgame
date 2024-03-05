@@ -1,0 +1,38 @@
+<html>
+<head>
+</head>
+<body>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<!--<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>-->
+<!--<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>-->
+<script type="text/babel">
+  'use strict';
+
+  class LikeButton extends React.Component {
+    state = { liked: false };
+
+    render() { //render의 return 부분이 화면을 그리는 부분
+      if (this.state.liked) {
+        return 'You liked this.';
+      }
+
+      return (
+        <button onClick={() => {
+          //this.state.like = true; //이렇게 객체를 함부로 바꾸지 말자
+          this.setState({liked: true}) //리액트에선 객체를 함부로 바꾸지말고 이렇게 복사해라.
+        }}>
+          Like
+        </button>
+      );
+    }
+  }
+</script>
+<script type="text/babel">
+  //ReactDOM.render(<LikeButton/>, document.querySelector('#root')); //React 17 버전 코드
+  ReactDOM.createRoot(document.querySelector('#root')).render(<LikeButton />); //React 18 버전 코드
+</script>
+</body>
+</html>
