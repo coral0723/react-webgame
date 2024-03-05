@@ -1,0 +1,30 @@
+<html>
+<head>
+</head>
+<body>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<!--<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>-->
+<!--<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>-->
+<script type="text/babel">
+  'use strict';
+
+  function LikeButton() { //함수형 컴포넌트X 함수 컴포넌트O
+    //장점: this 쓸 일이 없다
+    const [liked, setLiked] = React.useState(false); //구조분해
+    if (liked) {
+        return 'You liked this';
+    }
+    return (
+        <button onClick={() => { setLiked(true); }}>Like</button>
+    );
+  }
+</script>
+<script type="text/babel">
+  //ReactDOM.render(<LikeButton/>, document.querySelector('#root')); //React 17 버전 코드
+  ReactDOM.createRoot(document.querySelector('#root')).render(<LikeButton />); //React 18 버전 코드
+</script>
+</body>
+</html>
