@@ -45,14 +45,16 @@
       this.setState({ value: e.target.value });
     };
 
-    input;
+    onInput = (c) => { 
+      this.input = c; 
+    };
 
     render() { //setState가 실행될 때마다 render를 실행한다.
         return (
             <React.Fragment>
                 <div>{this.state.first} 곱하기 {this.state.second}는?</div>    
                 <form onSubmit={this.onSubmit}>
-                    <input ref={(c) => { this.input = c; }} type="number" value={this.state.value} onChange={this.onChange}/>
+                    <input ref={this.onInput} type="number" value={this.state.value} onChange={this.onChange}/>
                     <button>입력!</button>
                 </form>
                 <div>{this.state.result}</div>
