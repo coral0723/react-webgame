@@ -1,0 +1,70 @@
+<html>
+<head>
+<maeta charset="UTF-8"/>
+<title>구구단</title>
+</head>
+<body>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<!--<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>-->
+<!--<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>-->
+<script type="text/babel">
+  class GuGudan extends React.Component {
+    state = {
+        first: Math.ceil(Math.random() * 9),
+        second: Math.ceil(Math.random() * 9),
+        value: '',
+        result: '',
+    };
+
+    onSubmit = (e) => { //화살표 함수가 아니라 function을 쓰면 this가 달라져 버린다.
+      e.preventDefault();
+      if (parseInt(this.state.value) === this.state.first * this.state.second) {
+        this.setState((prevState) => { //prevState는 예전 state값, this.state하면 어느것이 과거의 state이고 미래의 state인지 헷갈리기 때문
+          //setState안에 this.state가 들어가면 prevState를 사용하자
+          return {
+            result: `${prevState.first} X ${prevState.second} = ${prevState.value} 정답`,
+            first: Math.ceil(Math.random() * 9),
+            second: Math.ceil(Math.random() * 9),
+            value: '',
+          };
+        })
+        this.input.focus();
+      } else {
+        this.setState({
+          result: '땡',
+          value: '',
+        });
+        this.input.focus();
+      }
+    };
+    
+    onChange = (e) => { //input의 값을 onChange로 직접 바꿔줘야 한다.
+      this.setState({ value: e.target.value });
+    };
+
+    input;
+
+    render() { //setState가 실행될 때마다 render를 실행한다.
+        return (
+            <React.Fragment>
+                <div>{this.state.first} 곱하기 {this.state.second}는?</div>    
+                <form onSubmit={this.onSubmit}>
+                    <input ref={(c) => { this.input = c; }} type="number" value={this.state.value} onChange={this.onChange}/>
+                    <button>입력!</button>
+                </form>
+                <div>{this.state.result}</div>
+            </React.Fragment>
+        );
+    }
+  }
+
+</script>
+<script type="text/babel">
+  ReactDOM.render(<GuGudan/>, document.querySelector('#root')); //React 17 버전 코드
+  //ReactDOM.createRoot(document.querySelector('#root')).render(<LikeButton />); //React 18 버전 코드
+</script>
+</body>
+</html>
