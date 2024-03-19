@@ -15,7 +15,7 @@
   \********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("var React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nvar ReactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\nvar WordRelay = __webpack_require__(/*! ./wordRelay */ \"./wordRelay.jsx\");\nReactDom.render( /*#__PURE__*/React.createElement(WordRelay, null), document.querySelector('#root'));\n\n//# sourceURL=webpack://lecture/./client.jsx?");
+eval("var React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nvar ReactDOM = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\nvar WordRelay = __webpack_require__(/*! ./wordRelay */ \"./wordRelay.jsx\");\n\n// ReactDom.render(<WordRelay />, document.querySelector('#root'));\nReactDOM.createRoot(document.querySelector('#root')).render( /*#__PURE__*/React.createElement(WordRelay, null));\n\n//# sourceURL=webpack://lecture/./client.jsx?");
 
 /***/ }),
 

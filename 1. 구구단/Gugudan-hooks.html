@@ -18,7 +18,7 @@
       const [result, setResult] = React.useState('');
       const inputRef = React.useRef(null); //hooks에서 ref를 쓰는 방법, null같이 초기값을 넣어줘도 된다
 
-      const onSubmitForm = () => { //state를 수정하면 이 함수가 통째로 실행된다(class문법은 render함수만 실행된다)
+      const onSubmitForm = (e) => { //state를 수정하면 이 함수가 통째로 실행된다(class문법은 render함수만 실행된다)
         e.preventDefault();
         if (parseInt(value) === first * second) {
             setResult('정답: ' + value);
@@ -44,7 +44,7 @@
           <React.Fragment>
             <div>{first} 곱하기 {second}는? </div>
             <form onSubmit={onSubmitForm}>
-              <input ref={inputRef} onChange={onChangeInput} value={value}/>
+              <input ref={inputRef} type="number" onChange={onChangeInput} value={value}/>
               <button>입력!</button>    
             </form>
             <div id="result">{result}</div>
@@ -54,8 +54,8 @@
 
 </script>
 <script type="text/babel">
-  ReactDOM.render(<GuGudan/>, document.querySelector('#root')); //React 17 버전 코드
-  //ReactDOM.createRoot(document.querySelector('#root')).render(<LikeButton />); //React 18 버전 코드
+  ReactDOM.render(<Gugudan/>, document.querySelector('#root')); //React 17 버전 코드
+  //ReactDOM.createRoot(document.querySelector('#root')).render(<Gugudan />); //React 18 버전 코드
 </script>
 </body>
 </html>
