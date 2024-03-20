@@ -19,7 +19,7 @@ module.exports = {
         presets: [
           ['@babel/preset-env', {
             targets: {
-              browsers: ['> 1% in KR'], // browserslist
+              browsers: ['> 5% in KR'], // browserslist
             },
             debug: true,
           }],
