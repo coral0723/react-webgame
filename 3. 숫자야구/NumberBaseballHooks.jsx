@@ -68,7 +68,7 @@ const NumberBaseballHooks = () => {
             <ul>
                 {tries.map((v, i) => {
                     return (
-                        <TryHooks key={`${i + 1}차 시도`} tryInfo = {v}/>
+                        <TryHooks key={`${i + 1}차 시도`} tryInfo = {v}/> // 이 부분이 계속 렌더링 된다.
                     )
                 })}
             </ul>
