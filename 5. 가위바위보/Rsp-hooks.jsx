@@ -1,4 +1,5 @@
 import React, {useState, useRef, useEffect} from "react";
+import useInterval from "./useInterval";
 
 const rspCoords = {
     바위: '0',
@@ -22,16 +23,7 @@ const Rsp = () => {
     const [result, setResult] = useState('');
     const [imgCoord, setImgcoord] = useState(rspCoords.바위);
     const [score, setScore] = useState(0);
-    const interval = useRef();
-
-    useEffect(() => {//componentDidMount, componentDidUpdate 역할(1대1은 아님)
-        console.log('다시 실행');
-        interval.current = setInterval(changeHand, 100);
-        return () => { //componentWillUnmount 역할
-            console.log('종료');
-            clearInterval(interval.current);
-        }
-    }, [imgCoord]);
+    const [isRunning, setIsRunning] = useState(true);
 
     const changeHand = () => {
         if(imgCoord === rspCoords.바위) {
@@ -41,29 +33,33 @@ const Rsp = () => {
         } else if (imgCoord === rspCoords.보) {
             setImgcoord(rspCoords.바위);
         }
-    }
+    };
+
+    useInterval(changeHand, isRunning ? 100 : null);
 
     const onClickBtn = (choice) => () => {
-        clearInterval(interval.current);
-        const MyScore = scores[choice];
-        const cpuScore = scores[computerChoice(imgCoord)];
-        const diff = MyScore - cpuScore;
-        if (diff === 0) {
-            setResult('비겼습니다.');
-        } else if ([-1, 2].includes(diff)) {
-            setResult('이겼습니다.');
-            setScore((prevScore) => {
-                return prevScore + 1;
-            })
-        } else {
-            setResult('졌습니다.');
-            setScore((prevScore) => {
-                return prevScore - 1;
-            })
+        if (isRunning) { //멈췄을 때 또 클릭하는 것 방지
+            setIsRunning(false);
+            const MyScore = scores[choice];
+            const cpuScore = scores[computerChoice(imgCoord)];
+            const diff = MyScore - cpuScore;
+            if (diff === 0) {
+                setResult('비겼습니다.');
+            } else if ([-1, 2].includes(diff)) {
+                setResult('이겼습니다.');
+                setScore((prevScore) => {
+                    return prevScore + 1;
+                })
+            } else {
+                setResult('졌습니다.');
+                setScore((prevScore) => {
+                    return prevScore - 1;
+                })
+            }
+            setTimeout(() => {
+                setIsRunning(true);
+            }, 1000);
         }
-        setTimeout(() => {
-            interval.current = setInterval(changeHand, 100);
-        }, 2000);
     }
     return (
         <>
